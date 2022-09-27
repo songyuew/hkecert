@@ -6,7 +6,7 @@ Sign, verify, encrypt and decrypt messages with Hong Kong Post e-Cert (香港郵
 
 ## Functions
 
-Hong Kong Post is acting as the CA to connect legal identities with digital certificates. Therefore, signed messages can be used for identity verification or proof of true willingness.
+Hong Kong Post is acting as the CA to connect legal identities with digital certificates. Therefore, signed messages can be used for identity verification or proof of true willingness (signer's authentication, data integrity and non-repudiation).
 - Sign message
 - Verify signature
 - Encrypt message
