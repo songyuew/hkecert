@@ -34,7 +34,7 @@ openssl dgst -sha256 -sign <PRIVATE_KEY>.pem -out <SIGNATURE_FILENAME>.sig <FILE
 ### Sign a message
 
 ```
-echo -n <MESSAGE_TO_SIGN> | openssl dgst -sha256 -sign <PRIVATE_KEY>.pem | xxd -p
+echo -n <MESSAGE_TO_SIGN> | openssl dgst -sha256 -sign <PRIVATE_KEY>.pem | xxd -p | tr -d \\n > <SIGNATURE_FILENAME>.sig
 ```
 
 
