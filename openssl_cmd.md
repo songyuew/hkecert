@@ -25,9 +25,18 @@ openssl pkcs12 -in <P12_FILENAME>.p12 -out <TARGET_FILENAME>.pem -legacy
 
 ## Create Signature
 
+### Sign a file
+
 ```
 openssl dgst -sha256 -sign <PRIVATE_KEY>.pem -out <SIGNATURE_FILENAME>.sig <FILE_TO_SIGN>
 ```
+
+### Sign a message
+
+```
+echo -n <MESSAGE_TO_SIGN> | openssl dgst -sha256 -sign <PRIVATE_KEY>.pem | xxd -p
+```
+
 
 - If the `.pem` file is passphase protected, you will be prompted to type it here.
 
@@ -61,4 +70,20 @@ openssl pkeyutl -decrypt -inkey <PRIVATE_KEY>.pem -in <CIPHER_FILE>.enc > <TARGE
 
 ```
 openssl x509 -in <CERTIFICATE>.cer -noout -text
+```
+
+## Misc
+
+OpenSSL operations that are not relevant to this project but also common.
+
+### Derive public key from private key file
+
+```
+openssl rsa -in <PRIVATE_KEY>.pem -outform PEM -pubout -out <PUBLIC_KEY>.pem
+```
+
+### Get public key modulus and exponent
+
+```
+openssl asn1parse -inform PEM -i -strparse 19 -in public.pem
 ```
