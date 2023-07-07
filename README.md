@@ -12,6 +12,7 @@ Hong Kong Post is acting as the CA to connect legal identities with digital cert
 - Encrypt message
 - Decrypt message
 - View certificate
+- Extract public key in PEM format, RSA modulus and exponent from $.p12$ file
 
 ## Getting Started
 
