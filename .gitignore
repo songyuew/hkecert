@@ -1,0 +1,5 @@
+*.cer
+*.p12
+*.sig
+*.exe
+*.enc
