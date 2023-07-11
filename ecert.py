@@ -147,7 +147,7 @@ def viewPK(pubKey):
     print(colored("RSA Modulus (m)", "magenta"))
     print(hex(pubKey.public_numbers().n))
     print(colored("RSA Exponent (e)", "magenta"))
-    print(hex(pubKey.public_numbers().e))
+    print("0x" + hex(pubKey.public_numbers().e)[2:].zfill(256))
     print(colored("PEM Format", "magenta"))
     print(pubKey.public_bytes(
         encoding=serialization.Encoding.PEM,
@@ -195,6 +195,17 @@ def decrypt(enc_file,p12Path):
     except (OpenSSL.crypto.Error,ValueError):
         print(colored("Message decryption failed","red"))
         raise internalError
+    
+def notepad():
+    print("Enter or paste your text. Ctrl-D or Ctrl-Z to exit")
+    contents = []
+    while True:
+        try:
+            line = input()
+        except EOFError:
+            break
+        contents.append(line)
+    return "\n".join(contents).encode("utf-8")
 
 def main():
     try:
@@ -205,18 +216,18 @@ def main():
                 print(op)
 
                 if op == "Sign":
-                    msg = input("Message to sign: ").encode()
+                    msg = notepad()
                     p12Path = input("P12 file path: ")
                     sign(msg,p12Path)
                     
                 elif op == "Verify":
-                    msg = input("Message to verify: ").encode()
+                    msg = notepad()
                     sigFile = input("Signature path: ")
                     certPath = input("Sender's certificate path: ")
                     verify(msg,sigFile,certPath)
 
                 elif op == "Encrypt":
-                    msg = input("Message to encrypt: ").encode()
+                    msg = notepad()
                     certPath = input("Certificate path: ")
                     encrypt(msg,certPath)
 
